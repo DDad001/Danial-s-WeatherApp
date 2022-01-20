@@ -1,7 +1,7 @@
 // let weather = {
 //     apiKey:"6deba018ba79d7228f7ada2989972f0c",
 //     fetchWeather: function(city){
-    
+
 //         fetch("http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=metric&appid="+ this.apiKey)
 //         .then((response) => response.json())
 //         .then((data) => this.displayWeather(data))
@@ -51,22 +51,117 @@
 
 // weather.fetchWeather(console.log("Lodi"));
 
+// const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+// const d = new Date();
+// let day = weekday[d.getDay()];
+// document.getElementById("demo").innerHTML = day;
 
-function fetchWeather()
+
+//getting the current day by using the date provided from the data
+function getDayName(dateStr, locale)
 {
-    fetch("http://api.openweathermap.org/data/2.5/forecast?q=Texas&APPID=6deba018ba79d7228f7ada2989972f0c")
+    let date = new Date(dateStr);
+    return date.toLocaleDateString(locale, { weekday: 'long' });        
+}
+let dateStr = '2022-01-24';
+let day = getDayName(dateStr, 'en-US');
+document.getElementById("getDay").textContent = day;
+
+
+
+function fetchWeather(city)
+{
+    fetch("http://api.openweathermap.org/data/2.5/forecast?q=Texas&units=metric&APPID=6deba018ba79d7228f7ada2989972f0c")
 
     .then(response => response.json())
     .then(data => {
-        console.log(data.city.name);
-        console.log(data.city.country);
-        console.log(data.list[0].main.temp);
-        console.log(data.list[1].main.temp);
-        console.log(data.list[2].main.temp);
-        console.log(data.list[3].main.temp);
-        console.log(Math.floor(data.list[4].main.temp));
-        console.log(data.list[0].weather[0].description);
-    })
-}
-fetchWeather();
 
+
+        weatherInfo = data;
+      
+        
+        console.log(weatherInfo.city.name);
+        console.log(weatherInfo.city.country);
+
+        console.log(weatherInfo.list[0].main.temp_max);
+        console.log(weatherInfo.list[0].main.temp_min);
+
+        console.log(weatherInfo.list[8].main.temp_max);
+        console.log(weatherInfo.list[8].main.temp_min);
+
+        console.log(weatherInfo.list[17].main.temp_max);
+        console.log(weatherInfo.list[17].main.temp_min);
+
+        console.log(weatherInfo.list[25].main.temp_max);
+        console.log(weatherInfo.list[25].main.temp_min);
+
+        console.log(weatherInfo.list[32].main.temp_max);
+        console.log(weatherInfo.list[32].main.temp_min);
+
+        console.log(Math.floor(weatherInfo.list[4].main.temp));
+        console.log(weatherInfo.list[0].weather[0].description);
+
+        const splits =  weatherInfo.list[0].dt_txt.split(" ", 2);
+        console.log(splits[0]);
+        console.log(splits[1]);
+
+        console.log(weatherInfo.list[0].main.humidity);
+        console.log(weatherInfo.list[0].wind.speed);
+        console.log(weatherInfo.city.population);
+        console.log(weatherInfo);
+
+
+        let storeObjects = {
+
+        cityName: weatherInfo.city.name,
+        humidity: weatherInfo.list[0].main.humidity,
+        windSpeed: weatherInfo.list[0].wind.speed,
+        Populations: weatherInfo.city.population,
+        FirstMin: weatherInfo.list[0].main.temp_min,
+        FirstMax: weatherInfo.list[0].main.temp_max,
+
+        secondDay:[
+        { secondMin: weatherInfo.list[8].main.temp_min},
+        { secondMax: weatherInfo.list[8].main.temp_max}
+
+        ],
+        thirdDay:
+        [
+            { thirdMin: weatherInfo.list[17].main.temp_min},
+            { thirdMax: weatherInfo.list[17].main.temp_max}
+        ],
+        fourthDay:
+        [
+            { fourthMin: weatherInfo.list[25].main.temp_min},
+            { fourthMax: weatherInfo.list[25].main.temp_max}
+        ],
+        fifthDay:
+        [
+            { fifthMin: weatherInfo.list[32].main.temp_min},
+            { fifthMax: weatherInfo.list[32].main.temp_max}
+        ]
+        };
+
+    })
+
+        //0-7 is day 1
+
+        //8-16 is day 2
+
+        //17-24 is day 3
+
+        //25-31 is day 4
+
+        //32-40 is day 5
+
+        //get
+        //day---
+        //city name---
+        //temperterture Celsius min---
+        //temperterture Celsius max---
+        //description---
+        //humiddity---
+        //wind--
+        //precipitation changed it out for population----
+    }
+fetchWeather();
