@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
 body
 {
-    background-image: url('../images/henning-witzel-ukvgqriuOgo-unsplash.jpg');
+    background-image: url("https://source.unsplash.com/1620x900/?landscape"); 
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -117,7 +117,9 @@ input .placeholder
 
   .mtCustom
   {
-    margin-top: 60px;
+    margin-top: 40px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 25px;
   }
 
   p
@@ -143,7 +145,7 @@ input .placeholder
 
   .mrMoveAddFavorite
   {
-      margin-right: 140px;
+      margin-right: 150px;
   }
 
   .mrCards
@@ -283,3 +285,37 @@ input .placeholder
   }
   
   .close:hover {background: rgb(255, 0, 0);}
+
+  .padding
+  {
+    padding: 27px;
+  }
+  .btn-close
+  {
+    opacity: 1;
+  }
+
+  .createButton
+  {
+    background-image: url("../images/Icon\ awesome-heart.png");
+    height: 46px;
+    width: 59px;
+    background-size: cover;
+    /* background-repeat: no-repeat; */
+    /* margin-left: 80px !important; */
+  }
+
+
+  .createButton2
+  {
+    background-image: url("../images/Icon awesome-heartRed.png");
+    height: 46px;
+    width: 59px;
+    background-size: cover;
+    /* margin-left: 80px !important; */
+  }
+
+.moveLeft
+{
+  margin-left: 20px;
+}

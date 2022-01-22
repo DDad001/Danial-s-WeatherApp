@@ -185,7 +185,32 @@
 //   }
 //   fetchDailyWeather();
 
-import { GetWeatherByCityName, GetWeatherOneCall } from "./fetch.js";
+let dataStored = document.getElementById('dataStored');
+
+function MakeTheStorage(cityNameEntered)
+{
+let ul = document.createElement('ul')
+ul.className = "favoritesStored";
+
+
+let li = document.createElement('li');
+li.textContent = cityNameEntered.value;
+li.id = cityNameEntered.value;
+
+let span = document.createElement('span')
+span.className = "close";
+span.textContent = "x";
+
+li.appendChild(span)
+ul.appendChild(li);
+
+dataStored.appendChild(ul);
+
+
+/* <li>Lodi<span class="close">x</span></li> */
+}
+
+import { GetWeatherByCityName, GetOneCall } from "./fetch.js";
 import {SaveToLocalStorageByCityName, GetLocalStorage, RemoveFromLocalStorage} from "./localStorage.js";
 import GetLocationData from "./geolocation.js";
 
@@ -197,32 +222,60 @@ let injectHere = document.getElementById('injectHere');
 
 CitySearchBtn.addEventListener('click',function(e){
     GetWeatherByCityName(cityNameEntered.value);
+    FavoriteBtn.className = "button createButton";
 });
 
-PrintLS.addEventListener('click',function(e){
-    //Print Local Storage items in Console Log
-    let data = GetLocalStorage();
-    console.log(data);
-});
+cityNameEntered.addEventListener("keyup",function(event){
+    if(event.key === "Enter")
+    {
+        GetWeatherByCityName(cityNameEntered.value);
+        document.body.style.cursor = 'wait';
+    } 
+    else
+    {
+        document.body.style.cursor = 'default';
+    }
+})
+
+// PrintLS.addEventListener('click',function(e){
+
+//     let data = GetLocalStorage();
+//     console.log(data);
+// });
 
 let favOn = false;
 FavoriteBtn.addEventListener('click',function(e){
+    
     if(favOn == true){
         //Needs to be unfavorited
-       RemoveFromLocalStorage(cityNameEntered.value);
-       //Call a function to refresh you screen.
-        
-    }else{
-        //Needs to be favorited
-        SaveToLocalStorageByCityName(cityNameEntered.value);
-    }
-    favOn = !favOn;
+        RemoveFromLocalStorage(cityNameEntered.value);
+        //finds id of city name and removes it favorites
+        document.getElementById(cityNameEntered.value).remove();
+            FavoriteBtn.className = "button createButton";
+            
+        }else{
+            //Needs to be favorited
+            SaveToLocalStorageByCityName(cityNameEntered.value);
+            FavoriteBtn.className = "button createButton2";
+            MakeTheStorage(cityNameEntered);
+        }
+        favOn = !favOn;
+
+    // if(FavoriteBtn.className == "button createButton")
+    // {
+    // FavoriteBtn.className = "button createButton2";
+    // MakeTheStorage(cityNameEntered);
+    // }
+    // else if(FavoriteBtn.className != "button createButton")
+    // {
+    //     FavoriteBtn.className = "button createButton";
+    //     MakeTheStorage(cityNameEntered);
+    // }
     
 });
 
+
 GetLocationData();
-
-
 // function createStuff(){
 //     let button = MakeElement('button','btn btn-primary',"I am a button");
 //     injectHere.appendChild(button);
