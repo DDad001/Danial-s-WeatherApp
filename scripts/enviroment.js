@@ -1,12 +1,13 @@
 let isLive = true;
 
 let prod = {
-    apiKey: '6deba018ba79d7228f7ada2989972f0c',
+    apiKey: '8a17f8004dda4440c6940f303d9a602c',
     isLive: isLive
 }
 
 let dev = {
-    apiKey: '6deba018ba79d7228f7ada2989972f0c',
+    apiKey: '8a17f8004dda4440c6940f303d9a602c',
+    
     isLive: !isLive
 }
 
